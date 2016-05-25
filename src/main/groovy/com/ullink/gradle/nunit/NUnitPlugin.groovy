@@ -32,10 +32,10 @@ class NUnitPlugin implements Plugin<Project> {
             task.dependsOn project.tasks.msbuild
             task.conventionMapping.map "testAssemblies", {
                 project.tasks.msbuild.projects.findAll {
-                    it.key =~ 'test' && it.value.properties.TargetPath
+                    it.key =~ 'test'
                 }
                 .collect {
-                    it.value.getProjectPropertyPath('TargetPath')
+                    it.value.getDotnetAssemblyFile()
                 }
             }
         }
